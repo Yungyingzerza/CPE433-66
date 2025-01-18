@@ -35,12 +35,12 @@ namespace DNWS
       StringBuilder sb = new StringBuilder();
 
       IPEndPoint endpoint = IPEndPoint.Parse(request.getPropertyByKey("remoteendpoint"));
-      sb.Append("<html><body><pre>");
-      sb.AppendFormat("Client IP: {0}<br/>\n", endpoint.Address);
-      sb.AppendFormat("Client Port: {0}<br/>\n", endpoint.Port);
-      sb.AppendFormat("Browser Information: {0}<br/>\n", request.getPropertyByKey("user-agent").Trim());
-      sb.AppendFormat("Accept Language: {0}<br/>\n", request.getPropertyByKey("accept-language").Trim());
-      sb.AppendFormat("Accept Encoding: {0}<br/>\n", request.getPropertyByKey("accept-encoding").Trim());
+      sb.Append("<html><body><pre style=\"display: flex; flex-direction: column; gap: 15px\">");
+      sb.AppendFormat("<div>Client IP: {0}</div>", endpoint.Address);
+      sb.AppendFormat("<div>Client Port: {0}</div>", endpoint.Port);
+      sb.AppendFormat("<div>Browser Information: {0}</div>", request.getPropertyByKey("user-agent").Trim());
+      sb.AppendFormat("<div>Accept Language: {0}</div>", request.getPropertyByKey("accept-language").Trim());
+      sb.AppendFormat("<div>Accept Encoding: {0}</div>", request.getPropertyByKey("accept-encoding").Trim());
 
       sb.Append("</pre></body></html>");
 
