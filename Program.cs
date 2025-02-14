@@ -311,6 +311,10 @@ namespace DNWS
 
                         TaskInfo ti = new TaskInfo(hp);
                         ThreadPool.QueueUserWorkItem(new WaitCallback(ThreadProc), ti);
+
+                        // Option 2
+                        // Thread thread = new Thread(new ParameterizedThreadStart(ThreadProc));
+                        // thread.Start(new TaskInfo(hp));
                     }
 
                 }
