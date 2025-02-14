@@ -297,7 +297,22 @@ namespace DNWS
                     // Get one, show some info
                     _parent.Log("Client accepted:" + clientSocket.RemoteEndPoint.ToString());
                     HTTPProcessor hp = new HTTPProcessor(clientSocket, _parent);
-                    hp.Process();
+
+                    if(threadingMode.ToLower().Equals("single")) {
+                        hp.Process();
+                    }
+                    else {
+                        // Multi-threading
+                        // Can test by uncommenting  System.Threading.Thread.Sleep(5000); in ClientInfoPlugin.cs 
+                        // by open two browser and access the server
+                        // one at http://127.0.0.1:8080/clientinfo
+                        // while the first one is loading you keep refreshing the http://127.0.0.1:8080/ on another browser/tab
+                        // you can compare the speed of the response with Single threading mode
+
+                        TaskInfo ti = new TaskInfo(hp);
+                        ThreadPool.QueueUserWorkItem(new WaitCallback(ThreadProc), ti);
+                    }
+
                 }
                 catch (Exception ex)
                 {

@@ -44,6 +44,9 @@ namespace DNWS
 
       sb.Append("</pre></body></html>");
 
+      // simulate heavy processing for testing thread
+      // System.Threading.Thread.Sleep(5000);
+
       response = new HTTPResponse(200);
       response.body = Encoding.UTF8.GetBytes(sb.ToString());
       return response;
